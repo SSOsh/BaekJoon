@@ -1,0 +1,26 @@
+#include <iostream>
+#include <string>
+using namespace std;
+
+int main() {
+	string str;
+	bool dist = true;
+	int result = 0;
+	getline(cin, str);
+	for (int i = 0; i < str.length(); i++) {
+		if (str[i] != ' ' && dist == true) {
+			result++;
+			dist = false;
+		}
+		else if(str[i] != ' ' && dist == false) {
+
+		}
+		else {
+			dist = true;
+		}
+	}
+
+	cout << result;
+
+	return 0;
+}

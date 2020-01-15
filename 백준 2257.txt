@@ -1,0 +1,155 @@
+#include <iostream>
+#include <string>
+#include <stack>
+using namespace std;
+
+//string 잡기
+string chemical;
+//값 temp저장
+stack<int> si;
+//'('괄호수
+int istack = 0;
+//결과저장
+int result = 0;
+//현재 char
+char curr;
+//다음 char
+char nex;
+
+int main() {
+	cin >> chemical;
+	int length = chemical.length();
+	for (int i = 0; i < length; i++) {
+		curr = chemical[i];
+		//마지막일때
+		if (i + 1 == length) {
+			//숫자라면
+			if (curr >= 48 && curr <= 57) {
+				if (!si.empty()) {
+					while (!si.empty()) {
+						if (istack == 1) {
+							result = si.top() * (curr - 48);
+							si.pop(); istack--;
+						}
+						else {
+							result += si.top();
+							si.pop(); istack--;
+						}
+					}
+				}
+			}
+			//문자라면
+			else {
+				if (!si.empty()) {
+					while (!si.empty()) {
+						result += si.top();
+						si.pop(); istack--;
+					}
+				}
+				switch (curr) {
+				case 'H':
+					result += 1;
+					break;
+				case 'C':
+					result += 12;
+					break;
+				case 'O':
+					result += 16;
+					break;
+				}
+			}
+		}
+		//다음 next을 보고 결정.
+		else {
+			nex = chemical[i + 1];
+			//현재 char이 '('라면
+			if (curr == '(') {
+				si.push(0);
+				istack++;
+				continue;
+			}
+			//현재 char이 ')'라면
+			else if (curr == ')') {
+				int temp2, temp;
+				if (si.size() > 1) {
+					temp2 = si.top();
+					si.pop();
+					temp = si.top();
+					si.pop();
+
+					if (nex >= 48 && nex <= 57) {
+						si.push((temp2 * (nex - 48)) + temp);
+					}
+					else {
+						si.push(temp + temp2);
+					}
+				}
+				else {
+					temp = si.top();
+					si.pop();
+
+					if (nex >= 48 && nex <= 57) {
+						si.push(temp * (nex - 48));
+					}
+					else {
+						si.push(temp);
+					}
+				}
+				istack--;
+			}
+			//현재 char이 문자라면
+			else if (curr == 'H' || curr == 'C' || curr == 'O') {
+				if (nex >= 48 && nex <= 57) {
+					int temp = 0;
+					if (!si.empty()) {
+						temp = si.top();
+						si.pop();
+					}
+					switch (curr) {
+					case 'H':
+						temp += 1 * (nex - 48);
+						si.push(temp);
+						break;
+					case 'C':
+						temp += 12 * (nex - 48);
+						si.push(temp);
+						break;
+					case 'O':
+						temp += 16 * (nex - 48);
+						si.push(temp);
+						break;
+					}
+				}
+				//nex가 숫자가 아니라면
+				else {
+					int temp = 0;
+					if (!si.empty()) {
+						temp = si.top();
+						si.pop();
+					}
+					switch (curr) {
+					case 'H':
+						temp += 1;
+						si.push(temp);
+						break;
+					case 'C':
+						temp += 12;
+						si.push(temp);
+						break;
+					case 'O':
+						temp += 16;
+						si.push(temp);
+						break;
+					}
+				}
+			}
+			//현재 char이 숫자라면
+			else if (curr >= 48 && 57) {
+				continue;
+			}
+		}
+	}
+
+	cout << result << endl;
+	return 0;
+}

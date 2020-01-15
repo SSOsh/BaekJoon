@@ -1,0 +1,85 @@
+#include <iostream>
+#include <string>
+using namespace std;
+
+int main() {
+	int n;
+	cin >> n;
+	string *url = new string[n];
+	string *protocol = new string[n];
+	string *host = new string[n];
+	string *port = new string[n];
+	string *path = new string[n];
+
+	for (int i = 0; i < n; i++) {
+		cin >> url[i];
+		protocol[i] = "<default>";
+		host[i] = "<default>";
+		port[i] = "<default>";
+		path[i] = "<default>";
+	}
+
+	for (int i = 0; i < n; i++) {
+		int index = url[i].find("://");
+		protocol[i] = url[i].substr(0, index);
+		url[i].erase(0, index + 3);
+
+		index = url[i].find(":");
+		int index2 = url[i].find("/");
+
+		//host만 존재
+		if (index == -1 && index2 == -1) {
+			host[i] = url[i];
+		}
+		//path만 존재
+		else if (index == -1) {
+			host[i] = url[i].substr(0, index2);
+			url[i].erase(0, index2 + 1);
+			path[i] = url[i];
+		}
+		//port만 존재
+		else if (index2 == -1) {
+			host[i] = url[i].substr(0, index);
+			url[i].erase(0, index + 1);
+			port[i] = url[i];
+		}
+		else if (index > index2) {
+			host[i] = url[i].substr(0, index2);
+			url[i].erase(0, index2 + 1);
+			path[i] = url[i];
+		}
+		//port, path존재
+		else {
+			host[i] = url[i].substr(0, index);
+			url[i].erase(0, index + 1);
+			index2 = url[i].find("/");
+			port[i] = url[i].substr(0, index2);
+			url[i].erase(0, index2 + 1);
+			path[i] = url[i];
+		}
+	}
+
+	for (int i = 0; i < n; i++) {
+		if (i == n - 1) {
+			cout << "URL #" << i + 1 << endl;
+			cout << "Protocol = " << protocol[i] << endl;
+			cout << "Host     = " << host[i] << endl;
+			cout << "Port     = " << port[i] << endl;
+			cout << "Path     = " << path[i];
+		}
+		else {
+			cout << "URL #" << i + 1 << endl;
+			cout << "Protocol = " << protocol[i] << endl;
+			cout << "Host     = " << host[i] << endl;
+			cout << "Port     = " << port[i] << endl;
+			cout << "Path     = " << path[i] << endl << endl;
+		}
+	}
+
+	delete[] url;
+	delete[] protocol;
+	delete[] host;
+	delete[] port;
+	delete[] path;
+	return 0;
+}

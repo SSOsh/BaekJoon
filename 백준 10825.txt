@@ -1,0 +1,96 @@
+#include <iostream>
+
+#include <string>
+
+#include <string.h>
+
+#include <algorithm>
+
+using namespace std;
+
+
+struct Student {
+
+	int kor;
+
+	int eng;
+
+	int math;
+
+	char name[10];
+
+	bool operator<(Student &t) {
+
+		//국어점수가 같다.
+	
+	if (kor == t.kor) {
+
+			//영어점수가 같다.
+
+			if (eng == t.eng) {
+	
+			//수학점수가 같다.
+	
+				if (math == t.math) {
+
+					//이름이 사전순으로 증가하게
+
+					return strcmp(name, t.name) < 0;
+
+				}
+
+				else {
+
+					return math > t.math;
+
+				}
+
+			}
+
+			else {
+
+				return eng < t.eng;
+
+			}
+
+		}
+
+		else {
+
+			return kor > t.kor;
+	
+		}	
+	}
+
+};
+
+
+Student s[100000];
+
+
+int main() {
+
+	int n;
+
+	cin >> n;
+
+
+	for (int i = 0; i < n; i++) {
+
+		scanf("%s", s[i].name);
+
+		scanf("%d %d %d", &s[i].kor, &s[i].eng, &s[i].math);
+
+	}
+
+	sort(s, s + n);
+
+	for (int i = 0; i < n; i++) {
+
+		printf("%s\n", s[i].name);
+
+	}
+
+	return 0;
+
+}

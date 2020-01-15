@@ -1,0 +1,64 @@
+#include <iostream>
+#include <string>
+using namespace std;
+
+const int SIZE = 100;
+
+int main() {
+	int num;
+	string str = "";
+	string *tmp = new string[SIZE];
+	//몇 번 루프 확인
+	cin >> num;
+	cin.ignore();
+	//전체적인 내용
+	for (int i = 0; i < num; i++) {
+		int j = 0;
+		//원문 cin
+		getline(cin, str);
+		while (1) {
+			// ~ goes ~ cin
+			getline(cin, tmp[j]);
+			//what~이면 break;
+			if (tmp[j] == "what does the fox say?") {
+				break;
+			}
+			j++;
+		}
+		//~ goes ~ 확인해서 원문에서 제외
+		for (int k = 0; k < j; k++) {
+			int index = tmp[k].find("goes");
+			tmp[k].erase(0, index + 5);
+		}
+		//잘라놓은 goes내용을 string에서 find해서 erase하기
+		for (int k = 0; k < j; k++) {
+			while (1) {
+				int index = str.find(tmp[k]);
+
+				if (index == -1) break;
+
+				//끝에 지울 때
+				if (index + tmp[k].length() == str.length()) {
+					if(str[index - 1] == 32) {
+						str.erase(index - 1, tmp[k].length() + 1);
+					}
+					else break;
+				}
+				//맨앞 지울 때
+				else if (index == 0) {
+					if (str[tmp[k].length()] == 32) {
+						str.erase(0, tmp[k].length() + 1);
+					}
+					else break;
+				}
+				//중간 지울 때
+				else if (str[index - 1] == 32 && str[index + tmp[k].length()] == 32) {
+					str.erase(index, tmp[k].length() + 1);
+				}
+			}
+		}
+		cout << str << endl;
+
+	}
+	return 0;
+}

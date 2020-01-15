@@ -1,0 +1,48 @@
+#include <iostream>
+#include <string>
+#include <time.h>
+//sort½Ã ÇÊ¿ä include
+#include <queue>
+#include <functional>
+using namespace std;
+
+struct Word{
+	string word;
+	int length;
+	bool operator<(Word &t) {
+		if (length == t.length) {
+			return word < t.word;
+		}
+		else {
+			return length < t.length;
+		}
+	}
+};
+
+Word s[20000];
+
+int main() {
+	int n, o = 0;
+	cin >> n;
+
+	for (int i = 0; i < n; i++) {
+		cin >> s[i].word;
+		s[i].length = s[i].word.length();
+	}
+	sort(s, s + n);
+	for (int i = 0; i < n; i++) {
+		if (s[i].word == s[i + 1].word) {
+			continue;
+		}
+		else {
+			if (i == n - 1) {
+				cout << s[i].word;
+			}
+			else {
+				cout << s[i].word << "\n";
+			}
+		}
+	}
+
+	return 0;
+}

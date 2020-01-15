@@ -1,0 +1,65 @@
+#include <iostream>
+#include <string>
+#include <stack>
+using namespace std;
+
+stack<char> stack1;
+stack<char> stack2;
+
+string tcase;
+
+int main() {
+	int n;
+	scanf("%d", &n);
+	for (int i = 0; i < n; i++) {
+		cin >> tcase;
+
+		for (int k = 0; k < tcase.length(); k++) {
+			//왼커서(1빼서2로)
+			if (tcase[k] == '<') {
+				if (!stack1.empty()) {
+					char temp = stack1.top();
+					stack1.pop();
+					stack2.push(temp);
+				}
+				else {
+					continue;
+				}
+			}
+			//오른커서(2빼서1로)
+			else if (tcase[k] == '>') {
+				if (!stack2.empty()) {
+					char temp = stack2.top();
+					stack2.pop();
+					stack1.push(temp);
+				}
+				else {
+					continue;
+				}
+			}
+			//지우기
+			else if (tcase[k] == '-') {
+				if (!stack1.empty()) {
+					stack1.pop();
+				}
+			}
+			//커서, 지우기 제외한 글자
+			else {
+				stack1.push(tcase[k]);
+			}
+		}
+		//stack2로 옮겨줌
+		while (!stack1.empty()) {
+			char temp = stack1.top();
+			stack1.pop();
+			stack2.push(temp);
+		}
+		//표시
+		while (!stack2.empty()) {
+			printf("%c", stack2.top());
+			stack2.pop();
+		}
+		printf("\n");
+	}
+	return 0;
+}

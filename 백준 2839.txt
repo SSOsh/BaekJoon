@@ -1,0 +1,26 @@
+#include <iostream>
+using namespace std;
+
+int main() {
+	int n;
+	cin >> n;
+	
+	int cnt = n / 5;
+	
+	if (n % 5 != 0) {
+		while (1) {
+			if (cnt == -1) break;
+			if ((n - (5 * cnt)) % 3 == 0) {
+				cnt += (n - (5 * cnt)) / 3;
+				break;
+			}
+			else {
+				cnt--;
+			}
+		}
+
+	}
+	cout << cnt;
+
+	return 0;
+}

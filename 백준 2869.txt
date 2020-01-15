@@ -1,0 +1,13 @@
+#include <iostream>
+using namespace std;
+
+int main() {
+	int a, b, v;
+	int result;
+	scanf("%d %d %d", &a, &b, &v);
+
+	result = (v - b - 1) / (a - b) + 1;
+	cout << result;
+
+	return 0;
+}

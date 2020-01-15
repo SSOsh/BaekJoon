@@ -1,0 +1,21 @@
+#include <iostream>
+using namespace std;
+
+int main() {
+	int n;
+	int memory, a;
+	int cnt = 0;
+	cin >> n;
+
+	memory = n;
+
+	do {
+		a = (memory / 10 + memory % 10) % 10 + (memory % 10) * 10;
+		memory = a;
+		cnt++;
+	}
+	while (a != n);
+
+	cout << cnt;
+	return 0;
+}

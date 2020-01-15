@@ -1,0 +1,39 @@
+#include <iostream>
+#include <string>
+#include <time.h>
+//sort½Ã ÇÊ¿ä include
+#include <queue>
+#include <functional>
+using namespace std;
+
+struct Student{
+	string name;
+	int age;
+	int order;
+	bool operator<(Student &t) {
+		if (age == t.age) {
+			return order < t.order;
+		}
+		else {
+			return age < t.age;
+		}
+	}
+};
+
+Student s[100000];
+
+int main() {
+	int n, o = 0;
+	cin >> n;
+
+	for (int i = 0; i < n; i++) {
+		cin >> s[i].age >> s[i].name;
+		s[i].order = o++;
+	}
+	sort(s, s + n);
+	for (int i = 0; i < n; i++) {
+		cout << s[i].age << " " << s[i].name << "\n";
+	}
+
+	return 0;
+}

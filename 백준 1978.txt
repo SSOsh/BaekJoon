@@ -1,0 +1,32 @@
+#include <iostream>
+
+using namespace std;
+
+int num[100];
+
+int main() {
+	//갯수입력, 값입력
+	int n;
+	cin >> n;
+	for (int i = 0; i < n; i++) {
+		cin >> num[i];
+	}
+	int count = 0;
+	//소수찾기
+	for (int i = 0; i < n; i++) {
+		if (num[i] == 1) {
+			count++;
+			continue;
+		}
+		for (int j = 2; j < num[i]; j++) {
+			if (num[i] % j == 0) {
+				count++;
+				break;
+			}
+		}
+	}
+
+	cout << n - count << endl;
+
+	return 0;
+}

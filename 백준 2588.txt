@@ -1,0 +1,22 @@
+#include <iostream>
+using namespace std;
+
+int main() {
+	int num1, num2, result;
+	int n;
+	cin >> num1 >> num2;
+
+	result = num1 * num2;
+
+	for (int i = 0; i < 3; i++) {
+		n = num2 % 10;
+		num2 /= 10;
+		//3,4,5표기
+		cout << num1 * n << endl;
+	}
+	//6표기
+	cout << result << endl;
+
+
+	return 0;
+}

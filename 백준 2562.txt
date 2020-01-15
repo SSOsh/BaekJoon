@@ -1,0 +1,23 @@
+#include <iostream>
+
+using namespace std;
+
+int main() {
+	int line = 0;
+	int value[9];
+	int max = 0;
+	for (int i = 0; i < 9; i++) {
+		cin >> value[i];
+	}
+	for (int i = 0; i < 9; i++) {
+		if (max < value[i]) {
+			max = value[i];
+			line = i + 1;
+		}
+	}
+
+	cout << max << endl << line;
+
+
+	return 0;
+}

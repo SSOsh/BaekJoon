@@ -1,0 +1,48 @@
+#include <iostream>
+#include <string>
+#include <stack>
+using namespace std;
+
+stack<char> cstack;
+string str;
+bool dist = false;
+int length;
+int main() {
+	int n;
+	cin >> n;
+	for (int i = 0; i < n; i++) {
+		cin >> str;
+		length = str.length();
+		for (int k = 0; k < length; k++) {
+			if (str[k] == '(') {
+				cstack.push(str[k]);
+			}
+			else {
+				if (!cstack.empty()) {
+					cstack.pop();
+				}
+				else {
+					printf("NO\n");
+					dist = true;
+					break;
+				}
+			}
+		}
+		if (dist) {
+			dist = false;
+			continue;
+		}
+		if (!cstack.empty()) {
+			printf("NO\n");
+			while (!cstack.empty()) {
+				cstack.pop();
+			}
+		}
+		else {
+			printf("YES\n");
+		}
+	}
+
+
+	return 0;
+}
