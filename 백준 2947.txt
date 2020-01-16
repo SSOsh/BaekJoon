@@ -1,0 +1,44 @@
+#include <iostream>
+using namespace std;
+
+int main() {
+	int a[5];
+	int temp;
+	for (int i = 0; i < 5; i++) {
+		scanf("%d", &a[i]);
+	}
+	
+	while (1) {
+		if (a[0] == 1 && a[1] == 2 && a[2] == 3 && a[3] == 4 && a[4] == 5) {
+			break;
+		}
+		if (a[0] > a[1]) {
+			temp = a[0];
+			a[0] = a[1];
+			a[1] = temp;
+			cout << a[0] << " " << a[1] << " " << a[2] << " " << a[3] << " " << a[4] << endl;
+		}
+		if (a[1] > a[2]) {
+			temp = a[1];
+			a[1] = a[2];
+			a[2] = temp;
+			cout << a[0] << " " << a[1] << " " << a[2] << " " << a[3] << " " << a[4] << endl;
+		}
+		if (a[2] > a[3]) {
+			temp = a[2];
+			a[2] = a[3];
+			a[3] = temp;
+			cout << a[0] << " " << a[1] << " " << a[2] << " " << a[3] << " " << a[4] << endl;
+		}
+		if (a[3] > a[4]) {
+			temp = a[3];
+			a[3] = a[4];
+			a[4] = temp;
+			cout << a[0] << " " << a[1] << " " << a[2] << " " << a[3] << " " << a[4] << endl;
+		}
+
+
+	}
+
+	return 0;
+}

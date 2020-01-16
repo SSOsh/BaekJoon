@@ -1,0 +1,52 @@
+#include <iostream>
+#include <string>
+using namespace std;
+
+int main() {
+	string a, b, result = "";
+	cin >> a >> b;
+	int carry = 0, rest;
+	if (a.length() > b.length()) {
+		while (a.length() != b.length()) b.insert(0, "0");
+	}
+	else {
+		while (a.length() != b.length()) a.insert(0, "0");
+	}
+	for (int i = a.length() - 1; i >= 0; i--) {
+		if ((a[i] - 48) + (b[i] - 48) >= 10) {
+			if (carry == 1) {
+				carry = 1;
+				rest = ((a[i] - 48) + (b[i] - 48)) % 10 + 1;
+				if (rest >= 10) {
+					rest %= 10;
+					carry = 1;
+				}
+			}
+			else {
+				carry = 1;
+				rest = ((a[i] - 48) + (b[i] - 48)) % 10;
+			}
+		}
+		else {
+			if (carry == 1) {
+				carry = 0;
+				rest = ((a[i] - 48) + (b[i] - 48)) % 10 + 1;
+				if (rest >= 10) {
+					rest %= 10;
+					carry = 1;
+				}
+			}
+			else {
+				carry = 0;
+				rest = ((a[i] - 48) + (b[i] - 48)) % 10;
+			}
+		}
+		result.insert(0, to_string(rest));
+	}
+	if (carry == 1) {
+		result.insert(0, "1");
+	}
+	cout << result;
+
+	return 0;
+}
