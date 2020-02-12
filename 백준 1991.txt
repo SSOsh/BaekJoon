@@ -1,0 +1,92 @@
+#include <iostream>
+#include <string.h>
+using namespace std;
+
+class Tree {
+public:
+	char value[26];
+	int left[26];
+	int right[26];
+
+	Tree() {
+		memset(value, '.', 26);
+		memset(left, -1, 26);
+		memset(right, -1, 26);
+	}
+
+	void preorder(int n) {
+		cout << value[n];
+		if (left[n] != -1) {
+			preorder(left[n]);
+		}
+		if (right[n] != -1) {
+			preorder(right[n]);
+		}
+	}
+
+	void inorder(int n) {
+		if (left[n] != -1) {
+			inorder(left[n]);
+		}
+		cout << value[n];
+		if (right[n] != -1) {
+			inorder(right[n]);
+		}
+	}
+	void postorder(int n) {
+		if (left[n] != -1) {
+			postorder(left[n]);
+		}
+		if (right[n] != -1) {
+			postorder(right[n]);
+		}
+		cout << value[n];
+	}
+
+};
+
+//preorder = VLR
+//inorder = LVR
+//postorder = LRV
+
+int main() {
+	ios_base::sync_with_stdio(0);
+
+	int n;
+	char cen, left, right;
+
+	cin >> n;
+	Tree tree;
+
+	for (int i = 0; i < n; i++) {
+		cin >> cen >> left >> right;
+		if (left != '.' && right != '.') {
+			tree.value[cen - 'A'] = cen;
+			tree.left[cen - 'A'] = left - 'A';
+			tree.right[cen - 'A'] = right - 'A';
+		}
+		else if (left != '.') {
+			tree.value[cen - 'A'] = cen;
+			tree.left[cen - 'A'] = left - 'A';
+			tree.right[cen - 'A'] = -1;
+		}
+		else if (right != '.') {
+			tree.value[cen - 'A'] = cen;
+			tree.left[cen - 'A'] = -1;
+			tree.right[cen - 'A'] = right - 'A';
+		}
+		else {
+			tree.value[cen - 'A'] = cen;
+			tree.left[cen - 'A'] = -1;
+			tree.right[cen - 'A'] = -1;
+		}
+	}
+
+	tree.preorder(0);
+	cout << "\n";
+	tree.inorder(0);
+	cout << "\n";
+	tree.postorder(0);
+
+	return 0;
+}
