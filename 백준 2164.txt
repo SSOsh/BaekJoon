@@ -1,0 +1,28 @@
+#include <iostream>
+#include <queue>
+using namespace std;
+
+int main() {
+	queue<int> q;
+	bool dist = true;
+	int n;
+	scanf("%d", &n);
+	for (int i = 0; i < n; i++) {
+		q.push(i + 1);
+	}
+	while (q.size() != 1) {
+		switch (dist) {
+		case true:
+			q.pop();
+			dist = false;
+			break;
+		case false:
+			q.push(q.front());
+			q.pop();
+			dist = true;
+			break;
+		}
+	}
+	printf("%d", q.front());
+	return 0;
+}

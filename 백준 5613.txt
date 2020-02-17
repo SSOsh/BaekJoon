@@ -1,0 +1,50 @@
+#include <iostream>
+#include <string>
+#include <stack>
+using namespace std;
+
+int main() {
+	int a, b;
+	string ch;
+	stack<string> s;
+	stack<string> c;
+	string str;
+
+	while (getline(cin, str)) {
+		if (str != "+" && str != "-" && str != "*" && str != "/" && str != "=") {
+			if (!s.empty() && !c.empty()) {
+				a = stoi(s.top());
+				b = stoi(str);
+				s.pop();
+				ch = c.top();
+				c.top();
+				if (ch == "+") {
+					s.push(to_string(a + b));
+				}
+				else if (ch == "-") {
+					s.push(to_string(a - b));
+				}
+				else if (ch == "*") {
+					s.push(to_string(a * b));
+				}
+				else if (ch == "/") {
+					s.push(to_string(a / b));
+				}
+			}
+			else {
+				s.push(str);
+			}
+		}
+		else {
+			if (!(str == "=")) {
+				c.push(str);
+			}
+			else {
+				cout << s.top();
+				break;
+			}
+		}
+	}
+
+	return 0;
+}

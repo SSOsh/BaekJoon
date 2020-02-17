@@ -1,0 +1,41 @@
+#include <iostream>
+#include <vector>
+#include <algorithm>
+using namespace std;
+
+class point {
+public:
+	int x;
+	int y;
+	point(int x, int y) {
+		this->x = x;
+		this->y = y;
+	}
+	bool operator<(point a) const {
+		if (a.y == this->y) {
+			return a.x > this->x;
+		}
+		else {
+			return a.y > this->y;
+		}
+	}
+};
+
+int main() {
+	vector<point> v;
+	int X; int Y;
+	int n;
+	scanf("%d", &n);
+	for (int i = 0; i < n; i++) {
+		scanf("%d %d", &X, &Y);
+		v.push_back(point(X, Y));
+	}
+
+	sort(v.begin(), v.end());
+
+	for (int i = 0; i < n; i++) {
+		printf("%d %d\n", v[i].x, v[i].y);
+	}
+
+	return 0;
+}

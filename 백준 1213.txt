@@ -1,0 +1,90 @@
+#include <iostream>
+#include <string>
+using namespace std;
+
+int alpha[26];
+
+int main() {
+	int mid = -2;
+	string str;
+	cin >> str;
+
+	for (int i = 0; i < str.length(); i++) {
+		alpha[str[i] - 65]++;
+	}
+	for (int i = 0; i < 26; i++) {
+		if (!(alpha[i] % 2 == 0)) {
+			if (mid != -2) {
+				mid = -1;
+				printf("I'm Sorry Hansoo");
+				break;
+			}
+			else {
+				mid = i;
+			}
+		}
+	}
+	if (!(mid == -1)) {
+		if (mid == -2) {
+			for (int i = 0; i < 26; i++) {
+				if (alpha[i] != 0) {
+					for (int j = 0; j < alpha[i] / 2; j++) {
+						cout << (char)(i + 65);
+					}
+				}
+				alpha[i] /= 2;
+			}
+			for (int i = 25; i >= 0; i--) {
+				if (alpha[i] != 0) {
+					while (alpha[i] != 0) {
+						cout << (char)(i + 65);
+						alpha[i]--;
+					}
+				}
+			}
+		}
+		else {
+			alpha[mid]--;
+			if (alpha[mid] == 1) {
+				for (int i = 0; i < 26; i++) {
+					if (alpha[i] != 0) {
+						for (int j = 0; j < alpha[i] / 2; j++) {
+							cout << (char)(i + 65);
+						}
+					}
+					alpha[i] /= 2;
+				}
+				cout << (char)(mid + 65);
+				for (int i = 25; i >= 0; i--) {
+					if (alpha[i] != 0) {
+						while (alpha[i] != 0) {
+							cout << (char)(i + 65);
+							alpha[i]--;
+						}
+					}
+				}
+			}
+			else {
+				for (int i = 0; i < 26; i++) {
+					if (alpha[i] != 0) {
+						for (int j = 0; j < alpha[i] / 2; j++) {
+							cout << (char)(i + 65);
+						}
+					}
+					alpha[i] /= 2;
+				}
+				cout << (char)(mid + 65);
+				for (int i = 25; i >= 0; i--) {
+					if (alpha[i] != 0) {
+						while (alpha[i] != 0) {
+							cout << (char)(i + 65);
+							alpha[i]--;
+						}
+					}
+				}
+			}
+		}
+	}
+
+	return 0;
+}

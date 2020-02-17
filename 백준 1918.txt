@@ -1,0 +1,104 @@
+#include <iostream>
+#include <string>
+#include <stack>
+using namespace std;
+
+int inpriority(char n) {
+	switch (n) {
+	case '+':
+		return 1;
+		break;
+	case '-':
+		return 1;
+		break;
+	case '*':
+		return 2;
+		break;
+	case '/':
+		return 2;
+		break;
+	case '(':
+		return 0;
+		break;
+	}
+	return -1;
+}
+
+int outpriority(char n) {
+	switch (n) {
+	case '+':
+		return 1;
+		break;
+	case '-':
+		return 1;
+		break;
+	case '*':
+		return 2;
+		break;
+	case '/':
+		return 2;
+		break;
+	case '(':
+		return 3;
+		break;
+	}
+	return -1;
+}
+
+int main() {
+	stack<char> sta;
+	string str;
+	cin >> str;
+
+	for (int i = 0; i < str.length(); i++) {
+		if (str[i] >= 65 && str[i] <= 90) {
+			cout << str[i];
+		}
+		else {
+			if (sta.empty()) {
+				sta.push(str[i]);
+			}
+			else if (str[i] == ')') {
+				while (1) {
+					if (sta.top() == '(') {
+						sta.pop();
+						break;
+					}
+					cout << sta.top();
+					sta.pop();
+				}
+			}
+			else {
+				//넣기
+				if (inpriority(sta.top()) < outpriority(str[i])) {
+					sta.push(str[i]);
+				}
+				//빼고 넣기
+				else {
+					while (!sta.empty()) {
+						if (inpriority(sta.top()) >= outpriority(str[i])) {
+							if (sta.empty()) {
+								break;
+							}
+							cout << sta.top();
+							sta.pop();
+						}
+						else {
+							break;
+						}
+					}
+					sta.push(str[i]);
+
+				}
+			}
+		}
+	}
+	if (!sta.empty()) {
+		while (!sta.empty()) {
+			cout << sta.top();
+			sta.pop();
+		}
+	}
+
+	return 0;
+}

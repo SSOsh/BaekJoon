@@ -1,0 +1,46 @@
+#include <iostream>
+#include <string>
+#include <stack>
+using namespace std;
+
+int alpha[26];
+
+int main() {
+	int n;
+	double a, b;
+	string str;
+	stack<double> s;
+	scanf("%d", &n);
+	cin >> str;
+
+	for (int i = 0; i < n; i++) {
+		scanf("%d", &alpha[i]);
+	}
+
+	for (int i = 0; i < str.length(); i++) {
+		if (str[i] >= 65 && str[i] <= 90) {
+			s.push(alpha[str[i] - 65]);
+		}
+		else {
+			b = s.top(); s.pop();
+			a = s.top(); s.pop();
+			switch (str[i]) {
+			case '+':
+				s.push(a + b);
+				break;
+			case '-':
+				s.push(a - b);
+				break;
+			case '*':
+				s.push(a * b);
+				break;
+			case '/':
+				s.push(a / b);
+				break;
+			}
+		}
+	}
+	printf("%.2f", s.top());
+
+	return 0;
+}

@@ -1,0 +1,80 @@
+#include <iostream>
+#include <string>
+using namespace std;
+
+class queue {
+private:
+	int queue[10000];
+	//나가는 곳
+	int fr = -1;
+	//넣는 곳
+	int ba = -1;
+
+public:
+	void push(int n) {
+		queue[++ba] = n;
+	}
+	int pop() {
+		if (empty()) {
+			return -1;
+		}
+		return queue[++fr];
+	}
+	int size() {
+		return ba - fr;
+	}
+	int empty() {
+		if (fr == ba) {
+			return 1;
+		}
+		else {
+			return 0;
+		}
+	}
+	int front() {
+		if (empty()) {
+			return -1;
+		}
+		return queue[fr + 1];
+	}
+	int back() {
+		if (empty()) {
+			return -1;
+		}
+		return queue[ba];
+	}
+};
+
+int main() {
+	queue q;
+	int n;
+	scanf("%d", &n);
+
+	string str;
+	int temp;
+
+	for (int i = 0; i < n; i++) {
+		cin >> str;
+		if (str == "push") {
+			scanf("%d", &temp);
+			q.push(temp);
+		}
+		else if (str == "pop") {
+			cout << q.pop() << endl;
+		}
+		else if (str == "size") {
+			cout << q.size() << endl;
+		}
+		else if (str == "empty") {
+			cout << q.empty() << endl;
+		}
+		else if (str == "front") {
+			cout << q.front() << endl;
+		}
+		else if (str == "back") {
+			cout << q.back() << endl;
+		}
+	}
+
+	return 0;
+}
