@@ -1,0 +1,36 @@
+#include <iostream>
+using namespace std;
+
+void hanoi(int n, int here, int to, int by) {
+	if (n == 1) {
+		cout << here << " " << to << "\n";
+	}
+	else {
+		//맨 아랫판 옮기기 전
+		hanoi(n - 1, here, by, to);
+		cout << here << " " << to << "\n";
+		//아랫판을 옮기고 난 다음 나머지
+		hanoi(n - 1, by, to, here);
+	}
+}
+
+void hanoiNum(int n) {
+	int result = 2;
+	for (int i = 1; i < n; i++) {
+		result *= 2;
+	}
+	cout << result - 1 << "\n";
+}
+
+int main() {
+	ios_base::sync_with_stdio(0);
+
+	int n;
+	cin >> n;
+
+	hanoiNum(n);
+	hanoi(n, 1, 3, 2);
+
+
+	return 0;
+}
