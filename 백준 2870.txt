@@ -1,0 +1,76 @@
+#include <iostream>
+#include <string>
+#include <vector>
+#include <queue>
+#include <algorithm>
+using namespace std;
+
+
+bool cmp(const vector<char> one, vector<char> two) {
+	if (one.size() != two.size()) {
+		return one.size() < two.size();
+	}
+	else {
+		for (int i = 0; i < one.size(); i++) {
+			if (one[i] != two[i]) {
+				return one[i] < two[i];
+			}
+		}
+	}
+}
+
+int main() {
+	ios_base::sync_with_stdio(0);
+	int n;
+	cin >> n;
+	vector<char> c;
+	string str;
+	vector<vector<char>> v;
+	for (int i = 0; i < n; i++) {
+		cin >> str;
+		for (int j = 0; j < str.length(); j++) {
+			if (str[j] >= 48 && str[j] <= 57) {
+				c.push_back(str[j]);
+			}
+			else {
+				if (!c.empty()) {
+					while (1) {
+						if (c.front() == '0' && c.size() != 1) {
+							c.erase(c.begin());
+						}
+						else {
+							break;
+						}
+					}
+					v.push_back(c);
+					c.clear();
+				}
+			}
+			if (j == str.length() - 1) {
+				if (!c.empty()) {
+					while (1) {
+						if (c.front() == '0' && c.size() != 1) {
+							c.erase(c.begin());
+						}
+						else {
+							break;
+						}
+					}
+					v.push_back(c);
+					c.clear();
+				}
+			}
+		}
+	}
+	sort(v.begin(), v.end(), cmp);
+
+	for (int i = 0; i < v.size(); i++) {
+		for (int j = 0; j < v[i].size(); j++) {
+			cout << v[i][j];
+		}
+		cout << "\n";
+	}
+
+
+	return 0;
+}

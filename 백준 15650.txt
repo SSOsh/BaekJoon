@@ -1,0 +1,36 @@
+#include <iostream>
+using namespace std;
+
+int n, m;
+bool visit[8] = { false, };
+int arr[8];
+
+void func(int count, int cur) {
+	if (count == m) {
+		for (int i = 0; i < m; i++) {
+			cout << arr[i] << " ";
+		}
+		cout << "\n";
+		return;
+	}
+
+	for (int i = cur; i < n; i++) {
+		if (!visit[i]) {
+			visit[i] = true;
+			arr[count] = i + 1;
+			func(count + 1, i + 1);
+			visit[i] = false;
+		}
+	}
+
+}
+
+
+int main() {
+	ios_base::sync_with_stdio(0);
+
+	cin >> n >> m;
+	func(0, 0);
+
+	return 0;
+}
