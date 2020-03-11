@@ -1,0 +1,48 @@
+package hello;
+
+import java.io.BufferedReader;
+import java.io.IOException;
+import java.io.InputStreamReader;
+import java.util.Stack;
+import java.util.Vector;
+
+public class Main {
+
+	public static void main(String[] args) {
+		BufferedReader br = new BufferedReader(new InputStreamReader(System.in));
+		String str = new String();
+		try {
+			str = br.readLine();
+		} catch (IOException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+
+		int result = 0;
+		Stack<Integer> s = new Stack();
+		Vector<Integer> v = new Vector();
+		for (int i = 0; i < str.length(); i++) {
+			if (str.charAt(i) == '(') {
+				if (i != str.length() - 1) {
+					// 레이저
+					if (str.charAt(i + 1) == ')') {
+						result += s.size();
+					}
+					// 쇠막대
+					else {
+						s.push(1);
+					}
+				}
+			}
+			else {
+				// 쇠막대 끝
+				if (str.charAt(i - 1) != '(') {
+					result++;
+					s.pop();
+				}
+			}
+		}
+		System.out.println(result);
+	}
+
+}

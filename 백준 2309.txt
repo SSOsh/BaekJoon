@@ -1,0 +1,47 @@
+import java.util.Arrays;
+import java.util.Scanner;
+
+public class Main {
+	static int arr[] = new int[9];
+	static boolean visit[] = new boolean[9];
+	static boolean finish = false;
+
+	public static void main(String[] args) {
+		Scanner sc = new Scanner(System.in);
+
+		for (int i = 0; i < 9; i++) {
+			arr[i] = sc.nextInt();
+			visit[i] = false;
+		}
+
+		Arrays.sort(arr);
+		func(0, 0);
+
+		sc.close();
+	}
+	
+	static void func(int result, int cur) {
+		if (finish) {
+			return;
+		}
+		if (cur == 7) {
+			if (result == 100) {
+				for (int i = 0; i < 9; i++) {
+					if (visit[i]) {
+						System.out.println(arr[i]);
+					}
+				}
+				finish = true;
+			}
+		}
+		for (int i = cur; i < 9; i++) {
+			if (!visit[i]) {
+				visit[i] = true;
+				func(result + arr[i], cur + 1);
+				visit[i] = false;
+			}
+		}
+	}
+
+
+}

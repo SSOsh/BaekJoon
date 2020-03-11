@@ -1,23 +1,25 @@
-#include <iostream>
+import java.util.Scanner;
+import java.util.Vector;
 
-using namespace std;
-
-int main() {
-	int hour, minute;
-
-	cin >> hour >> minute;
-
-	minute -= 45;
-
-	if (minute <= 0) {
-		minute += 60;
-		hour -= 1;
-		if (hour <= 0) {
-			hour += 24;
+public class Main {
+	
+	public static void main(String[] args) {
+		Scanner sc = new Scanner(System.in);
+		int h, m;
+		h = sc.nextInt();
+		m = sc.nextInt();
+		
+		m -= 45;
+		if(m < 0) {
+			h -= 1;
+			m += 60;
+			if(h < 0) {
+				h += 24;
+			}
 		}
+		
+		System.out.println(h + " " + m);
+		sc.close();
 	}
 
-	cout << hour <<  " " << minute;
-
-	return 0;
 }
