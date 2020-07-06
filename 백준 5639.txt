@@ -1,0 +1,75 @@
+#include <iostream>
+
+using namespace std;
+
+class Node {
+public:
+	int value;
+	Node* left;
+	Node* right;
+
+	Node() {
+		value = -1;
+		left = NULL;
+		right = NULL;
+	}
+
+	Node(int n) {
+		value = n;
+		left = NULL;
+		right = NULL;
+	}
+
+	void inst(Node* n) {
+		//left
+		if (value > n->value) {
+			if (left != NULL) {
+				left->inst(n);
+			}
+			else {
+				left = n;
+			}
+		}
+		//right
+		else {
+			if (right != NULL) {
+				right->inst(n);
+			}
+			else {
+				right = n;
+			}
+		}
+	}
+
+	void print(Node* n) {
+		if (n->left != NULL) {
+			left->print(left);
+		}
+		if (n->right != NULL) {
+			right->print(right);
+		}
+		printf("%d\n", n->value);
+	}
+};
+
+int main() {
+	int n;
+	Node* root = NULL;
+
+	while (scanf("%d", &n) != EOF) {
+		Node* node = new Node(n);
+		if (root != NULL) {
+			root->inst(node);
+		}
+		else {
+			root = node;
+		}
+	}
+	//LRV 
+	root->print(root);
+
+
+	delete root;
+
+	return 0;
+}

@@ -1,0 +1,71 @@
+package hello;
+
+import java.util.Arrays;
+import java.util.Queue;
+import java.util.Scanner;
+import java.util.LinkedList;
+
+
+public class Main {
+	static int[][] arr;
+	static boolean[] visit;
+	static int n, m, v;
+	
+	static void BFS(int value) {
+		if(visit[value - 1]) return;
+		System.out.print(value + " ");
+		visit[value - 1] = true;
+		for(int i=0;i<n;i++) {
+			if(arr[value - 1][i] == 1) BFS(i + 1);
+		}
+	}
+	
+	static Queue<Integer> q = new LinkedList<>();
+	public static void main(String[] args) {
+		Scanner sc = new Scanner(System.in);
+
+
+		n = sc.nextInt();
+		m = sc.nextInt();
+		v = sc.nextInt();
+		
+		arr = new int[n][n];
+		visit = new boolean[n];
+		
+		for(int i=0;i<n;i++) {
+			Arrays.fill(arr[i], 0);	
+		}
+		Arrays.fill(visit, false);
+		
+		int val;
+		int val1, val2;
+		for(int i=0;i<m;i++) {
+			val1 = sc.nextInt();
+			val2 = sc.nextInt();
+			arr[val1 - 1][val2 - 1] = 1;
+			arr[val2 - 1][val1 - 1] = 1;
+		}
+		
+		//dfs(재귀)
+		
+		BFS(v);
+		System.out.println();
+		
+		//bfs(큐)
+		Arrays.fill(visit, false);
+		q.offer(v);
+		visit[v-1] = true;
+		while(true) {
+			if(q.isEmpty()) break;
+			val = q.poll();
+			System.out.print(val + " ");
+			for(int i=0;i<n;i++) {
+				if((arr[val - 1][i] == 1) && !visit[i]) {
+					q.offer(i + 1);
+					visit[i] = true;
+				}
+			}
+		}
+		
+	}
+}
