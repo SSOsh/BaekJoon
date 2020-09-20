@@ -1,0 +1,53 @@
+#include <iostream>
+#include <string>
+#include <stack>
+using namespace std;
+
+stack<int> is;
+
+int main() {
+	int N;
+	string str;
+	scanf("%d", &N);
+	getline(cin, str);
+	for (int i = 0; i < N; i++) {
+		getline(cin, str);
+		if (str == "pop") {
+			if (!is.empty()) {
+				printf("%d\n", is.top());
+				is.pop();
+			}
+			else {
+				printf("-1\n");
+			}
+		}
+		else if (str == "size") {
+			printf("%d\n", is.size());
+		}
+		else if (str == "top") {
+			if (!is.empty()) {
+				printf("%d\n", is.top());
+			}
+			else {
+				printf("-1\n");
+			}
+		}
+		else if (str == "empty") {
+			if (is.empty()) {
+				printf("1\n");
+			}
+			else {
+				printf("0\n");
+			}
+		}
+		else {
+			str.erase(0, 5);
+			is.push(stoi(str));
+		}
+	}
+
+
+
+
+	return 0;
+}
